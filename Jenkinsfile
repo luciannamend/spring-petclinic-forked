@@ -17,7 +17,7 @@ pipeline {
         stage('Code Coverage') {
             steps {
                 script {
-                    bat './mvnw jacoco:report'  // Runs Jacoco to generate the coverage report
+                    bat 'mvn jacoco:report'  // Runs Jacoco to generate the coverage report
                 }
             }
         }       
