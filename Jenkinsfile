@@ -1,0 +1,51 @@
+pipeline {
+    agent any
+
+    environment {
+        MAVEN_HOME = "C:/Program Files/apache-maven-3.9.9" 
+        JAVA_HOME = "C:/Program Files/Eclipse Foundation/jdk-8.0.302.8-hotspot" 
+    }
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                git 'https://github.com/luciannamend/spring-petclinic-forked.git' 
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    echo "Building the Maven project..."
+                    bat "mvn clean install"
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                script {
+                    echo "Running tests..."
+                    bat "mvn test"
+                }
+            }
+        }
+
+        stage('Code Coverage') {
+            steps {
+                script {
+                    bat './mvnw jacoco:report'  // Runs Jacoco to generate the coverage report
+                }
+            }
+        }       
+    }
+
+    post {
+        success {
+            echo 'Build completed successfully!'
+        }
+        failure {
+            echo 'Build failed!'
+        }
+    }
+}
