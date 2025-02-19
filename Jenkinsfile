@@ -9,7 +9,8 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                git 'https://github.com/luciannamend/spring-petclinic-forked.git' 
+                git branch: 'main', 
+                    url: 'https://github.com/luciannamend/spring-petclinic-forked.git'
             }
         }
 
