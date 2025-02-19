@@ -12,25 +12,7 @@ pipeline {
                 git branch: 'main', 
                     url: 'https://github.com/luciannamend/spring-petclinic-forked.git'
             }
-        }
-
-        stage('Build') {
-            steps {
-                script {
-                    echo "Building the Maven project..."
-                    bat "mvn clean install"
-                }
-            }
-        }
-
-        stage('Test') {
-            steps {
-                script {
-                    echo "Running tests..."
-                    bat "mvn test"
-                }
-            }
-        }
+        }       
 
         stage('Code Coverage') {
             steps {
